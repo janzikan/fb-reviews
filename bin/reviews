@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.expand_path('../lib', File.dirname(__FILE__)))
+
+require 'models/scraper'
+require 'models/export'
+
+page_name = ARGV[0].to_s
+abort 'No Facebook page given' if page_name.empty?
+
+# Scrape data
+puts "Scraping: #{page_name}"
+begin
+  scraper = Scraper.new
+  reviews = scraper.reviews(page_name)
+rescue Scraper::PageDoesNotExistError => e
+  abort(e.message)
+end
+
+puts ''
+puts "Number of reviews: #{reviews.size}"
+
+# Export
+puts 'Exporting data to TSV file'
+Export.to_tsv(page_name, reviews)
