@@ -36,21 +36,24 @@ class Scraper
 
     reviews.inject([]) do |data, review|
       review_link = review.find(SELECTOR_REVIEW_LINK)
-      review_path = review_link[:href]
+      review_url = review_link[:href]
 
       data << {
         time: created_at(review),
         score: score(review),
         author_name: author_name(review),
-        author_url: facebook_url(profile_path(review_path)),
-        review_url: facebook_url(review_path),
+        author_url: profile_url(review_url),
+        review_url: review_url,
         text: text(review)
       }
     end
   end
 
   def score(review)
-    review.find(SELECTOR_SCORE).text.match(/[1-5]/)[0].to_i
+    score = review.find(SELECTOR_SCORE).text
+    return if score.empty?
+
+    score.to_i
   end
 
   def author_name(review)
@@ -66,17 +69,13 @@ class Scraper
     Time.at(time)
   end
 
-  def profile_path(path)
-    if path.start_with?('/permalink.php')
-      param = path.match(/&(id=[0-9]+)/)[1]
-      "/profile.php?#{param}"
+  def profile_url(url)
+    if url.include?('/permalink.php')
+      param = url.match(/&(id=[0-9]+)/)[1]
+      "#{FB_URL}/profile.php?#{param}"
     else
-      path[0..path.index('/', 1)]
+      url.match(/#{FB_URL}\/[^\/]*\//)[0]
     end
-  end
-
-  def facebook_url(path)
-    "#{FB_URL}#{path}"
   end
 
   def load_all_reviews
