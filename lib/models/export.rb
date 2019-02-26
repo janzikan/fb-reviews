@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Export
-  COLUMNS = %i(time score author_name author_url review_url).freeze
-  SEPARATOR = "\t".freeze
+  COLUMNS = %i(time score author_name author_url review_url)
+  SEPARATOR = "\t"
 
   class << self
     def to_tsv(page_name, data)

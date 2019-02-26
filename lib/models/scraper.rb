@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'config/capybara'
 
 class Scraper
   class PageDoesNotExistError < StandardError; end
 
-  FB_URL = 'https://www.facebook.com'.freeze
-  FB_REVIEWS_URL = "#{FB_URL}/pg/%s/reviews/".freeze
+  FB_URL = 'https://www.facebook.com'
+  FB_REVIEWS_URL = "#{FB_URL}/pg/%s/reviews/"
 
   # Selectors
-  SELECTOR_REVIEWS = 'div._1dwg._1w_m'.freeze
-  SELECTOR_CONTENT = 'div.userContent'.freeze
-  SELECTOR_REVIEW_LINK = 'span.fsm a._5pcq'.freeze
-  SELECTOR_SCORE = 'h5 span.fcg i'.freeze
-  SELECTOR_AUTHOR = 'span.fwb'.freeze
+  SELECTOR_REVIEWS = 'div._1dwg._1w_m'
+  SELECTOR_CONTENT = 'div.userContent'
+  SELECTOR_REVIEW_LINK = 'span.fsm a._5pcq'
+  SELECTOR_SCORE = 'h5 span.fcg i'
+  SELECTOR_AUTHOR = 'span.fwb'
 
   def initialize
     @session = Capybara::Session.new(:webkit)
