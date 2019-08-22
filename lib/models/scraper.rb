@@ -85,12 +85,7 @@ class Scraper
       wait_for_ajax(current_reviews_count)
       print '.'
 
-      # New content - continue loading
-      next if current_reviews_count != reviews_count
-
-      # No new content -try for the last time
-      scroll_page
-      wait_for_ajax(current_reviews_count)
+      # No new content
       break if current_reviews_count == reviews_count
     end
   end
@@ -100,11 +95,13 @@ class Scraper
     interval = 0.1
 
     loop do
+      start_time = Time.now
       sleep interval
-      wait_time += interval
-
       break if current_reviews_count != reviews_count
-      break if wait_time >= 10
+      elapsed_time = Time.now - start_time
+
+      wait_time += elapsed_time
+      break if wait_time >= 5
     end
   end
 
