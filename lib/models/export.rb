@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Export
-  COLUMNS = %i(time score author_name author_url review_url)
+  COLUMNS = %i[time score author_name author_url review_url].freeze
   SEPARATOR = "\t"
 
   class << self
