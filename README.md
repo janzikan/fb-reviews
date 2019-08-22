@@ -11,7 +11,7 @@ bundle
 ## Usage
 Simply use the following command
 ```
-bin/reviews [FB page name]
+bundle exec bin/reviews [FB page name]
 ```
 
 This will generace TSV (Tab Separated Values) file `[FB page name].tsv`, containing the following information about each review:
