@@ -10,8 +10,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.6.0)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.0)
     capybara (3.28.0)
       addressable
@@ -30,7 +30,7 @@ GEM
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
-    public_suffix (3.1.1)
+    public_suffix (5.0.0)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
